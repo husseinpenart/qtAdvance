@@ -1,30 +1,64 @@
 import QtQuick
-
+import qtAdvance
+import QtQuick.Controls
+import QtQuick.Layouts
 Window {
     width: 640
     height: 480
     visible: true
-    title: qsTr("String list model")
+    title: qsTr("Object list model")
     ListView{
-            id : mListViewId
+            id : mListView
             anchors.fill: parent
-
-           // model: continentModel
-            //model: itemList1
-            model: itemList2
+            //model : personModel
+            model : modelId
             delegate: Rectangle {
-                height: 50
+                height: 90
                 radius: 10
-                color: "dodgerblue"
+                color : "gray"
                 border.color: "cyan"
-                width: (parent === null ?  rootId.width  : parent.width)
+                width: root.width
+                RowLayout{
+                    anchors.fill: parent
+                    anchors.margins: 20
+                    TextField{
+                        text : names
+                        Layout.fillWidth: true
+                        background: Rectangle{
+                            color:"white"
+                        }
+                    }
+                    SpinBox{
+                        editable: true
+                        value : age
+                        Layout.fillWidth: true
+                        background: Rectangle{
+                            color:"white"
+                        }
+                    }
+                    Rectangle{
+                        width : 50
+                        height: 50
+                        color: favoriteColor
 
-                Text {
-                    text: modelData
-                    font.pointSize: 20
-                    anchors.centerIn: parent
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    }
                 }
+            }
+        }
+
+        ListModel{
+            id : modelId
+            ListElement {
+                names : "Daniel Sten"; favoriteColor : "blue"; age : 10
+            }
+            ListElement {
+                names : "Stevie Wongers"; favoriteColor : "cyan"; age : 23
+            }
+            ListElement {
+                names : "Nicholai Ven"; favoriteColor : "red"; age : 33
+            }
+            ListElement {
+                names : "William Glen"; favoriteColor : "yellowgreen"; age : 45
             }
         }
 }
